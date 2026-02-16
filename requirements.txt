@@ -1,6 +1,11 @@
 fastapi
 uvicorn
-tensorflow
-pillow
-numpy
 gunicorn
+torch
+torchvision
+timm
+pillow
+opencv-python-headless
+numpy
+huggingface_hub
+scikit-learn
