@@ -20,7 +20,14 @@ app.add_middleware(
 )
 
 print("🚀 Starting API...")
-model = load_model()
+model = None
+
+def get_model():
+    global model
+    if model is None:
+        print("🔄 Loading model for first request...")
+        model = load_model()
+    return model
 
 @app.get("/")
 def root():
@@ -32,7 +39,9 @@ async def predict(file: UploadFile = File(...)):
         image_bytes = await file.read()
         image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
 
-        result = predict_image(model, image)
+        model_instance = get_model()  # 🔥 Lazy load here
+
+        result = predict_image(model_instance, image)
 
         return result
 
