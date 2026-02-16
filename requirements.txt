@@ -1,6 +1,5 @@
 fastapi
 uvicorn
-
 timm
 pillow
 opencv-python-headless
