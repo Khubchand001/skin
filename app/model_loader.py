@@ -12,9 +12,7 @@ def load_model():
     model_path = hf_hub_download(
         repo_id="khubchand/skin-model1",   
         filename="best_model.pth"
-
-"
-    )
+   )
 
     print("🔄 Creating model architecture...")
 
