@@ -1,4 +1,4 @@
-```python
+
 # app/model_loader.py
 
 import torch
@@ -35,4 +35,3 @@ def load_model():
     print("✅ Model loaded successfully")
 
     return model
-```

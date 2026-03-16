@@ -1,4 +1,4 @@
-```python
+
 # app/main.py
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
@@ -90,4 +90,4 @@ async def predict(file: UploadFile = File(...)):
             status_code=500,
             detail=str(e)
         )
-```
+
