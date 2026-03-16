@@ -7,17 +7,21 @@ import cv2
 import numpy as np
 
 CLASS_NAMES = [
+    "Akne",
+    "Athlete_foot",
+    "Benign",
     "Cellulitis",
+    "Chickenpox",
     "Impetigo",
-    "Athlete-foot",
     "Nail-fungus",
-    "Ringworms",
-    "Cutaneous-larva-migrans",
-    "Chickenpox"
+    "Pigment",
+    "Ringworm",
+    "Shingles",
+    "Normal_skin"
 ]
 
 transform = transforms.Compose([
-    transforms.Resize((380, 380)),
+    transforms.Resize((224, 224)),   # changed from 380 → 224 for EfficientNet-B0
     transforms.ToTensor(),
     transforms.Normalize(
         mean=[0.485, 0.456, 0.406],
@@ -63,14 +67,17 @@ def get_severity(conf: float) -> str:
 
 
 def predict_image(model, image: Image.Image):
+
     if not skin_filter(image):
         return {"error": "Uploaded image is not a skin image"}
 
     x = transform(image).unsqueeze(0)
 
     with torch.no_grad():
+
         logits = model(x)
         probs = torch.softmax(logits, dim=1)[0]
+
         confidence, idx = torch.max(probs, dim=0)
 
     disease = CLASS_NAMES[idx.item()]

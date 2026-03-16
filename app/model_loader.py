@@ -10,8 +10,10 @@ def load_model():
     print("🔄 Downloading model from Hugging Face...")
 
     model_path = hf_hub_download(
-        repo_id="khubchand/skin-model",   
-        filename="skin_disease_rtx3050ti_weights.pth"
+        repo_id="khubchand/skin-model1",   
+        filename="best_model.pth"
+
+"
     )
 
     print("🔄 Creating model architecture...")
