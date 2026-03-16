@@ -1,18 +1,20 @@
+```python
 # app/model_loader.py
 
 import torch
 import timm
 from huggingface_hub import hf_hub_download
 
-NUM_CLASSES = 7
+NUM_CLASSES = 11   # must match CLASS_NAMES
 
 def load_model():
+
     print("🔄 Downloading model from Hugging Face...")
 
     model_path = hf_hub_download(
-        repo_id="khubchand/skin-model1",   
+        repo_id="khubchand/skin_model1",
         filename="best_model.pth"
-   )
+    )
 
     print("🔄 Creating model architecture...")
 
@@ -23,11 +25,14 @@ def load_model():
     )
 
     print("🔄 Loading weights...")
-    model.load_state_dict(
-        torch.load(model_path, map_location="cpu")
-    )
+
+    state_dict = torch.load(model_path, map_location="cpu")
+
+    model.load_state_dict(state_dict)
 
     model.eval()
+
     print("✅ Model loaded successfully")
 
     return model
+```
