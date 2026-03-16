@@ -1,6 +1,6 @@
 
 # app/model_loader.py
-
+import os
 import torch
 import timm
 from huggingface_hub import hf_hub_download
@@ -13,7 +13,8 @@ def load_model():
 
     model_path = hf_hub_download(
         repo_id="khubchand/skin_model1",
-        filename="best_model.pth"
+        filename="best_model.pth",
+        token=os.getenv("HF_TOKEN")
     )
 
     print("🔄 Creating model architecture...")
