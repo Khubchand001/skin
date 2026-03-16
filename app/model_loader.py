@@ -20,7 +20,7 @@ def load_model():
     print("🔄 Creating model architecture...")
 
     model = timm.create_model(
-        "tf_efficientnet_b4.ns_jft_in1k",
+        "efficientnet_b0",
         pretrained=False,
         num_classes=NUM_CLASSES
     )
