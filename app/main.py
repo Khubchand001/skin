@@ -5,7 +5,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import io
-
+from app.model_loader import load_model, load_object_model
 from app.model_loader import load_model
 from app.predict import predict_image
 

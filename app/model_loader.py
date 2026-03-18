@@ -7,10 +7,10 @@ import torchvision.models as models
 import torchvision.transforms as transforms
 import cv2
 import numpy as np
-
+from torchvision.models import mobilenet_v3_small, MobileNet_V3_Small_Weights
 from PIL import Image
 from huggingface_hub import hf_hub_download
-
+os.environ["TORCH_HOME"] = "/opt/render/.cache/torch"
 
 NUM_CLASSES = 11   # must match CLASS_NAMES
 
@@ -63,8 +63,14 @@ def load_object_model():
     global _object_model
 
     if _object_model is None:
-        print("🔄 Loading MobileNet for object detection...")
-        _object_model = models.mobilenet_v3_small(pretrained=True)
+        print("⚡ Loading MobileNet once...")
+
+        from torchvision.models import mobilenet_v3_small, MobileNet_V3_Small_Weights
+
+        _object_model = mobilenet_v3_small(
+            weights=MobileNet_V3_Small_Weights.DEFAULT
+        )
+
         _object_model.to(DEVICE)
         _object_model.eval()
 
